@@ -1,55 +1,34 @@
-Users
----------
-id (PK)
-name
-email
-password
-created_at
 
-Products
------------
-id (PK)
-name
-description
-price
-stock
-category_id FK >- Categories.id
 
-Categories
-------------
-id (PK)
-name
 
-Order
---------
-id (PK)
-user_id FK - Users.id
-total_price
-status
-created_at
 
-Order_Items
-------------
-id PK
-order_id FK >- Order.id
-product_id FK >- Products.id
-quantity
-price
+CREATE TABLE Employees(
+EmpID INT IDENTITY(1,1) PRIMARY KEY,
+[Name] VARCHAR(50),
+Salary DECIMAL(10,2),
+);
+ALTER TABLE Employees
+ADD Department VARCHAR(50);
 
-Payments
------------
-id PK
-order_id FK >- Order.id
-payment_method
-amount
-status
-created_at
+SELECT * FROM Employees;
 
-Reviews
------------
-id (PK)
-user_id FK >- Users.id
-product_id FK >- Products.id
-rating
-comment
-created_at
+INSERT INTO Employees ([Name],Salary)
+VALUES 
+
+('Ozodbek',50000.00),
+('Timur',40000.00),
+('Xudoyor',95000.00);
+
+UPDATE Employees SET Salary = 52000.00 WHERE EmpID = 1;	
+
+DELETE FROM Employees WHERE EmpID = 2;
+
+
+TRUNCATE TABLE Employees;
+
+DROP TABLE Employees;
+
+ALTER TABLE Employees
+ALTER COLUMN NAME VARCHAR(100);
+
+TRUNCATE TABLE Employees;
