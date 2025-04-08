@@ -83,3 +83,57 @@ WHERE Salary > ANY (
 SELECT *
 FROM Customers
 ORDER BY City ASC, PostalCode DESC;
+
+------Hard-Level Tasks-----
+
+SELECT TOP(10) ProductName, SalesAmount
+FROM Products
+ORDER BY SalesAmount DESC;
+
+SELECT COALESCE(FirstName, '') + ' ' + COALESCE(LastName, '') AS FullName
+FROM Employees;
+
+
+SELECT DISTINCT Category, ProductName, Price
+FROM Products
+WHERE Price > 50;
+
+SELECT ProductName, Price
+FROM Products
+WHERE Price BETWEEN 
+    (SELECT AVG(Price) * 0.9 FROM Products) AND 
+    (SELECT AVG(Price) * 1.1 FROM Products);
+
+SELECT *
+FROM Employees
+WHERE Age < 30
+  AND Department IN ('HR', 'IT');
+
+SELECT *
+FROM Customers
+WHERE Email LIKE '%@gmail.com';
+
+SELECT *
+FROM Employees
+WHERE Salary > ALL (
+    SELECT Salary
+    FROM Employees
+    WHERE Department = 'Sales'
+);
+
+SELECT *
+FROM Employees
+ORDER BY Salary DESC
+OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;
+
+SELECT *
+FROM Orders
+WHERE OrderDate BETWEEN CURRENT_DATE - INTERVAL 30 DAY AND CURRENT_DATE;
+
+SELECT *
+FROM Employees e
+WHERE Salary > ANY (
+    SELECT AVG(Salary)
+    FROM Employees
+    GROUP BY Department
+);
